@@ -1,0 +1,203 @@
+background-primary = rgba(255, 119, 0, 1)
+color-primary = rgba(255, 255, 255, 1)
+
+background-secondary = rgba(131, 102, 86, 0.12);
+color-secondary = rgba(46, 47, 51, 1)
+
+timing-duration = 0.5s
+timing-function = cubic-bezier(0, -0.3, 0.5, 1.3)
+
+change-alpha(color, alpha)
+  rgba(
+    red(color),
+    green(color),
+    blue(color),
+    alpha
+  )
+
+primary()
+  background-color: background-primary
+  color: color-primary
+
+secondary()
+  background-color: background-secondary
+  color: color-secondary
+
+.button
+  border: none
+  text-align: center
+  position: relative
+  overflow: hidden
+  max-width: 100%
+
+.button::before
+  content: ''
+  position: absolute
+  top: 50%
+  left: 0
+  width: 100%
+  height: 500px
+  border-radius: 100%
+  transform-origin: 0 50%
+  transform: translateY(-50%) scale(0)
+  transition: transform timing-duration timing-function
+  z-index: 1
+
+.button:focus-visible
+  outline: none
+  box-shadow: 
+    0 0 0 3px rgba(255, 255, 255, 1),
+    0 0 0 6px rgba(0, 153, 255, 1)
+
+.button-enabled:hover
+  cursor: pointer
+
+.button-enabled:hover::before
+  transform: translateY(-50%) scale(1)
+
+.button-enabled:hover .content
+  transform: scale(1.05)
+
+.button[disabled]:not(.button-loading)
+  opacity: 0.36
+
+.button-loading::after
+  content: ''
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  animation: shimmer-movement 1s linear infinite
+
+.button-loading.button-primary::after
+  background: 
+    linear-gradient(
+      90deg, change-alpha(color-primary, 0) 0%, 
+      change-alpha(color-primary, 0.12) 16.32%, 
+      change-alpha(color-primary, 0) 33.02%
+    )
+
+.button-loading.button-secondary::after
+  background:
+    linear-gradient(
+      90deg, change-alpha(color-secondary, 0) 0%, 
+      change-alpha(color-secondary, 0.12) 16.32%, 
+      change-alpha(color-secondary, 0) 33.02%
+    )
+
+.button-primary::before
+  background-color: change-alpha(color-primary, 0.12)
+
+.button-primary:active::before
+  background-color: change-alpha(color-primary, 0.20)
+
+.button-secondary::before
+  background-color: change-alpha(color-secondary, 0.12)
+
+.button-secondary:active::before
+  background-color: change-alpha(color-secondary, 0.20) 
+
+.button-primary
+  primary()
+  
+.button-secondary
+  secondary()
+
+.button-size-28
+  padding: 6px 10px
+  border-radius: 9.3px
+
+  font-size: 13px
+  line-height: 16px
+  font-weight: 500
+
+.button-size-36
+  padding: 8px 12px
+  border-radius: 12px
+
+  font-size: 15px
+  line-height: 20px
+  font-weight: 500
+
+.button-size-56
+  padding: 16px
+  border-radius: 16px
+
+  font-size: 17px
+  font-weight: 500
+  line-height: 24px
+
+.button-size-28 .content
+  column-gap: 4px
+.button-size-36 .content
+  column-gap: 6px
+.button-size-56 .content
+  column-gap: 8px
+
+.content
+  display: flex
+  align-items: center
+  transition: transform timing-duration timing-function, opacity timing-duration linear
+
+.content-loading
+  opacity: 0
+
+.label
+  padding: 0
+  margin: 0
+  overflow: hidden
+  white-space: nowrap
+  text-overflow: ellipsis
+
+.content .counter
+  flex-shrink: 0
+
+.loader
+  width 100%
+  height: 100%
+  border-size: 2px
+  border-style: solid
+  border-bottom-color: transparent
+  border-radius: 50%
+  display: inline-block
+  box-sizing: border-box
+  animation: rotation 1s linear infinite, fadeIn timing-duration timing-function forwards
+
+.loader-wrapper
+  position absolute
+  left: 50%
+  transform: translateX(-50%)
+
+.loader-size-28
+  width: 16px
+  height: 16px
+  top: 6px
+
+.loader-size-36
+  width: 20px
+  height: 20px
+  top: 8px
+
+.loader-size-56
+  width: 24px
+  height: 24px
+  top: 16px
+
+@keyframes rotation
+  0%
+    transform: rotate(0deg)
+  100% 
+    transform: rotate(360deg)
+
+@keyframes fadeIn
+  0%
+    opacity 0
+  100%
+    opacity 1
+
+@keyframes shimmer-movement
+  0%
+    transform: translateX(-100%)
+  100%
+    transform: translateX(100%)

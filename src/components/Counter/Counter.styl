@@ -1,0 +1,119 @@
+background-primary = rgba(47, 182, 117, 1)
+color-primary = rgba(255, 255, 255, 1)
+
+background-secondary = rgba(131, 102, 86, 0.12)
+color-secondary = rgba(46, 47, 51, 1)
+
+change-alpha(color, alpha)
+  rgba(
+    red(color),
+    green(color),
+    blue(color),
+    alpha
+  )
+
+primary()
+  background-color: background-primary
+  color: color-primary
+
+secondary()
+  background-color: background-secondary
+  color: color-secondary
+
+.counter
+  position: relative
+  box-sizing: border-box
+  width: min-content
+  display: flex
+  justify-content: center
+  align-items: center
+  border-radius: 999px
+
+.counter-primary
+  primary()
+
+.counter-secondary
+  secondary()
+
+.counter-border
+  outline-color: rgba(255, 255, 255, 1)
+  outline-style: solid
+
+.counter-size-8
+  width: 8px
+  height: 8px
+  outline-width: 1px
+
+.counter-size-12
+  width: 12px
+  height: 12px
+  outline-width: 2px
+
+.counter-size-16
+  min-height: 16px
+  min-width: 16px
+  padding: 0px 4px
+  outline-width: 2px
+
+  font-size: 11px
+  line-height: 12px
+  letter-spacing: 0.55px
+  font-weight: 800
+
+.counter-size-20
+  min-height: 20px
+  min-width: 20px
+  padding: 0px 4px
+  outline-width: 2px
+
+  font-size: 13px
+  line-height: 16px
+  font-weight: 500
+
+.counter-size-24
+  min-height: 24px
+  min-width: 24px
+  padding: 0px 6px
+  outline-width: 3px
+
+  font-size: 15px
+  line-height: 20px
+  font-weight: 500
+
+.pulse 
+  position: absolute
+  border-radius: 999px
+  animation-name: scale-fade
+  animation-iteration-count: infinite
+  animation-duration: 2s
+
+.pulse.two
+  animation-delay: 0.25s
+
+@keyframes scale-fade 
+  0% 
+    opacity: 0.5
+    transform: scale(1)
+  
+  50% 
+    opacity: 0;
+    transform: scale(3)
+  
+  
+  100% 
+    opacity: 0;
+    transform: scale(3)
+
+.pulse-size-8
+  width 8px
+  height: 8px
+
+.pulse-size-12
+  width 12px
+  height: 12px
+
+.pulse-primary
+  background-color: change-alpha(background-primary, 0.2)
+
+.pulse-secondary
+  background-color: change-alpha(background-secondary, 0.2)
