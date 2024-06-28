@@ -21,7 +21,7 @@ export default {
 
 export const Primary = {
   args: {
-    quantity: 1,
+    value: 'хуй',
     variant: "primary",
     size: 24,
     border: false,

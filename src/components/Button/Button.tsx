@@ -8,7 +8,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: 'primary' | 'secondary';
   size: 28 | 36 | 56;
   state: 'enabled' | 'loading' | 'disabled';
-  counter: boolean;
+  counter?: boolean;
+  counterValue?: string | number;
 }
 
 type CounterSizeType = {
@@ -21,10 +22,10 @@ const counterSize: CounterSizeType= {
   '56': 24
 }
 
-const Button = ({variant, size, state, counter, label, ...props}: ButtonProps) => {
+const Button = ({variant, size, label, state, counter = false, counterValue, ...props}: ButtonProps) => {
   return (
     <button 
-      disabled={state !== 'enabled' ? true : false}
+      disabled={state !== 'enabled'}
       className={cn(
           `button`,
           `button-${variant}`,
@@ -49,7 +50,7 @@ const Button = ({variant, size, state, counter, label, ...props}: ButtonProps) =
             {label}
           </p>
           {counter && (
-            <Counter variant={variant} size={counterSize[size]} quantity={999}/>
+            <Counter variant={variant} size={counterSize[size]} value={counterValue}/>
           )}
         </>
       </div>

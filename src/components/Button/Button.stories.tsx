@@ -36,7 +36,8 @@ export const PrimaryNoCounter = {
 export const PrimaryWithCounter = {
   args: {
     ...PrimaryNoCounter.args,
-    counter: true
+    counter: true,
+    counterValue: 33
   }
 }
 

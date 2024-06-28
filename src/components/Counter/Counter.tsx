@@ -6,16 +6,16 @@ export interface CounterProps extends HTMLAttributes<HTMLDivElement> {
   variant: 'primary' | 'secondary';
   size: 8 | 12 | 16 | 20 | 24;
   border?: boolean;
-  quantity: string | number;
+  value?: string | number;
   pulse?: boolean;
 }
 
-const Counter = ({ variant, size, border = false, quantity, pulse = false, ...props }: CounterProps) => {
-  if(typeof quantity === 'string' && quantity.length > 3) {
-    quantity = quantity.slice(0, 3)
+const Counter = ({ variant, size, value, border = false, pulse = false, ...props }: CounterProps) => {
+  if(typeof value === 'string' && value.length > 3) {
+    value = value.slice(0, 3)
   } 
-  else if (typeof quantity === 'number' && quantity > 99) {
-    quantity = '99+'
+  else if (typeof value === 'number' && value > 99) {
+    value = '99+'
   }
 
   return (
@@ -35,7 +35,7 @@ const Counter = ({ variant, size, border = false, quantity, pulse = false, ...pr
       role='status'
       {...props}
     >
-      {size > 12 ? quantity : ''}
+      {size > 12 ? value : ''}
       {(pulse && size <= 12) && (
         <>
           <div className={`pulse one pulse-${variant} pulse-size-${size}`}></div>
